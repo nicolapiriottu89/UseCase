@@ -1,5 +1,7 @@
 package it.piriottu.usecase.ui.scenes.main.viewholders
 
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import it.piriottu.usecase.databinding.LayoutPostItemBinding
 import it.piriottu.usecase.ui.scenes.main.uiitems.PostUIItem
@@ -16,5 +18,17 @@ class MainPostViewHolder(private val binding: LayoutPostItemBinding) :
     fun bind(item: PostUIItem) {
         binding.title.text = item.title
         binding.body.text = item.body
+    }
+
+    companion object {
+        fun getBinding(parent: ViewGroup): LayoutPostItemBinding {
+            val inflater = LayoutInflater.from(parent.context)
+
+            return LayoutPostItemBinding.inflate(
+                inflater,
+                parent,
+                false
+            )
+        }
     }
 }
