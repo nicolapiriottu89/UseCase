@@ -1,11 +1,8 @@
 package it.piriottu.usecase.ui.scenes.main.adapters
 
-import android.view.LayoutInflater
 import android.view.ViewGroup
-import it.piriottu.usecase.databinding.LayoutPostItemBinding
 import it.piriottu.usecase.ui.scenes.main.uiitems.PostUIItem
 import it.piriottu.usecase.ui.scenes.main.viewholders.MainPostViewHolder
-
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 
