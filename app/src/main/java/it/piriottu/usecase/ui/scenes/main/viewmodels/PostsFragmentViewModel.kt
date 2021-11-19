@@ -15,7 +15,7 @@ import kotlinx.coroutines.withContext
  * Created by OverApp on 21/09/21.
  *  Visit https://www.overapp.com/
  */
-class MainActivityViewModel : ViewModel() {
+class PostsFragmentViewModel : ViewModel() {
 
     //region UseCase
     sealed class UseCaseLiveData {

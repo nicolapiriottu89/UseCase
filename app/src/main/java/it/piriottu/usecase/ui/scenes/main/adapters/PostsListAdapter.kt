@@ -2,7 +2,7 @@ package it.piriottu.usecase.ui.scenes.main.adapters
 
 import android.view.ViewGroup
 import it.piriottu.usecase.ui.scenes.main.uiitems.PostUIItem
-import it.piriottu.usecase.ui.scenes.main.viewholders.MainPostViewHolder
+import it.piriottu.usecase.ui.scenes.main.viewholders.PostViewHolder
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 
@@ -12,20 +12,20 @@ import androidx.recyclerview.widget.ListAdapter
  * Created by Nicola Luigi Piriottu on 15/11/21.
  * Copyright © 2021 UseCase. All rights reserved.
  */
-class MainListAdapter :
-    ListAdapter<PostUIItem, MainPostViewHolder>(DIFF_CALLBACK) {
+class PostsListAdapter :
+    ListAdapter<PostUIItem, PostViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): MainPostViewHolder {
+    ): PostViewHolder {
 
-        return MainPostViewHolder(
-            binding = MainPostViewHolder.getBinding(parent)
+        return PostViewHolder(
+            binding = PostViewHolder.getBinding(parent)
         )
     }
 
-    override fun onBindViewHolder(holder: MainPostViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 
