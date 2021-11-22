@@ -46,7 +46,7 @@ class MainFragment : Fragment() {
         }
 
         binding.fragmentError.setOnClickListener {
-            viewModel.onPostsClicked()
+            viewModel.onErrorClicked()
         }
     }
 
