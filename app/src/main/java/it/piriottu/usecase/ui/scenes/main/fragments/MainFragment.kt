@@ -28,7 +28,7 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate & Bind
-        binding =FragmentMainBinding.inflate(inflater, container, false)
+        binding = FragmentMainBinding.inflate(inflater, container, false)
         // Setup view
         setupView()
         // Setup Observer
@@ -41,29 +41,30 @@ class MainFragment : Fragment() {
     //region Private methods
     private fun setupView() {
         //Set Continue Button
-         binding.fragmentGetPosts.setOnClickListener {
-             viewModel.onPostsClicked()
-         }
+        binding.fragmentGetPosts.setOnClickListener {
+            viewModel.onPostsClicked()
+        }
 
         binding.fragmentError.setOnClickListener {
             viewModel.onPostsClicked()
         }
     }
+
     private fun setupObservers() {
         // Use Case
-          viewModel.useCaseLiveData.observe(viewLifecycleOwner, {
-              it.getContentIfNotHandled()?.let { useCase ->
-                  when (useCase) {
-                      is MainFragmentViewModel.UseCaseLiveData.GoToPostsFragment ->{
-                          findNavController().navigate(MainFragmentDirections.toPostsFragment())
-                      }
+        viewModel.useCaseLiveData.observe(viewLifecycleOwner, {
+            it.getContentIfNotHandled()?.let { useCase ->
+                when (useCase) {
+                    is MainFragmentViewModel.UseCaseLiveData.GoToPostsFragment -> {
+                        findNavController().navigate(MainFragmentDirections.toPostsFragment())
+                    }
 
-                      is MainFragmentViewModel.UseCaseLiveData.GoToErrorFragment ->{
-                          findNavController().navigate(MainFragmentDirections.toErrorFragment())
-                      }
-                  }
-              }
-          })
+                    is MainFragmentViewModel.UseCaseLiveData.GoToErrorFragment -> {
+                        findNavController().navigate(MainFragmentDirections.toErrorFragment())
+                    }
+                }
+            }
+        })
     }
     //endregion Private methods
 }
