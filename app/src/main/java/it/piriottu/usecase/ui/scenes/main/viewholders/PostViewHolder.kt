@@ -12,7 +12,7 @@ import it.piriottu.usecase.ui.scenes.main.uiitems.PostUIItem
  * Created by Nicola Luigi Piriottu on 15/11/21.
  * Copyright © 2021 UseCase. All rights reserved.
  */
-class MainPostViewHolder(private val binding: LayoutPostItemBinding) :
+class PostViewHolder(private val binding: LayoutPostItemBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
     fun bind(item: PostUIItem) {
