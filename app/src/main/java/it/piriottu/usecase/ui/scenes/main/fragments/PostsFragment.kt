@@ -6,11 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import it.piriottu.usecase.databinding.FragmentMainBinding
 import it.piriottu.usecase.databinding.FragmentPostsBinding
 import it.piriottu.usecase.managers.SessionManager
 import it.piriottu.usecase.ui.scenes.main.adapters.PostsListAdapter
