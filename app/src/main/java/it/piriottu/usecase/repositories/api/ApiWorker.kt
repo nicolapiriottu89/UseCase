@@ -18,7 +18,7 @@ import it.piriottu.usecase.managers.SessionManager
  */
 class ApiWorker {
 
-    val BASE_URL = "https://jsonplaceholder.typicode.com"
+    val BASE_URL = "https://jsonplaceholder.typicode.comTEST"
 
     private val client = HttpClient(CIO) {
 
