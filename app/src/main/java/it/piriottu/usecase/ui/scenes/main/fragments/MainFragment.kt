@@ -52,7 +52,7 @@ class MainFragment : Fragment() {
 
     private fun setupObservers() {
         // Use Case
-        viewModel.useCaseLiveData.observe(viewLifecycleOwner, {
+        viewModel.useCaseLiveData.observe(viewLifecycleOwner) {
             it.getContentIfNotHandled()?.let { useCase ->
                 when (useCase) {
                     is MainFragmentViewModel.UseCaseLiveData.GoToPostsFragment -> {
@@ -64,7 +64,7 @@ class MainFragment : Fragment() {
                     }
                 }
             }
-        })
+        }
     }
     //endregion Private methods
 }

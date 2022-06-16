@@ -66,7 +66,7 @@ class PostsFragment : Fragment() {
     private fun setupObservers() {
         // Use Case
 
-        viewModel.useCaseLiveData.observe(viewLifecycleOwner, {
+        viewModel.useCaseLiveData.observe(viewLifecycleOwner) {
             it.getContentIfNotHandled()?.let { useCase ->
                 binding.progress.isVisible = false
                 when (useCase) {
@@ -85,7 +85,7 @@ class PostsFragment : Fragment() {
 
                 }
             }
-        })
+        }
     }
     //endregion Private methods
 
