@@ -22,7 +22,6 @@ class PostsFragment : Fragment() {
      */
     private lateinit var binding: FragmentPostsBinding
 
-
     /**
      * ViewModel
      * */
@@ -34,7 +33,6 @@ class PostsFragment : Fragment() {
     private val adapter by lazy {
         PostsListAdapter()
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -66,6 +64,17 @@ class PostsFragment : Fragment() {
     private fun setupObservers() {
         // Use Case
 
+        viewModel.postLiveData.observe(viewLifecycleOwner) { items ->
+            // Update Items
+            adapter.submitList(items)
+            binding.progress.isVisible = false
+        }
+
+        viewModel.errorAPILiveData.observe(viewLifecycleOwner) {
+            findNavController().navigate(PostsFragmentDirections.toErrorFragment())
+            binding.progress.isVisible = false
+        }
+
         viewModel.useCaseLiveData.observe(viewLifecycleOwner) {
             it.getContentIfNotHandled()?.let { useCase ->
                 binding.progress.isVisible = false
@@ -88,6 +97,4 @@ class PostsFragment : Fragment() {
         }
     }
     //endregion Private methods
-
-
 }

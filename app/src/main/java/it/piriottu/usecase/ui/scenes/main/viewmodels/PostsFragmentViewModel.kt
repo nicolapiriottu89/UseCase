@@ -30,6 +30,8 @@ class PostsFragmentViewModel : ViewModel() {
     val useCaseLiveData = MutableLiveData<Event<UseCaseLiveData>>()
     //endregion LiveData
 
+    val postLiveData: MutableLiveData<MutableList<PostsItem>> = MutableLiveData()
+    val errorAPILiveData: MutableLiveData<Boolean> = MutableLiveData()
     //region Public Methods
 
     fun getPosts() {
@@ -42,60 +44,44 @@ class PostsFragmentViewModel : ViewModel() {
     //region Private Methods
     private suspend fun callPosts() {
         withContext(Dispatchers.IO) {
-            ApiRepositories.getAllPosts()
+            ApiRepositories.getPost()
         }.apply {
             when (this) {
                 is NetworkResponse.Success -> {
                     //UItem List
                     val items: MutableList<PostsItem> = mutableListOf()
                     //Map response
-                    this.data.forEach {
+                    val response = this.data
 
-                        items.addAll(
-                            mutableListOf(
-                                //Title View
-                                PostsItem.TitleUIItem(
-                                    titleResId = getRandomTitle(),
-                                    descriptionResId = getRandomMessage()
-                                ),
-                                //Image View
-                                PostsItem.ImageUIItem(imageResId = getRandomImage()),
-                                //Post View
-                                PostsItem.PostUIItem(title = it.title, body = it.body)
-                            )
+                    items.addAll(
+                        mutableListOf(
+                            //Title View
+                            PostsItem.TitleUIItem(
+                                titleResId = R.string.title_post_one,
+                                descriptionResId = R.string.message_post_one
+                            ),
+                            //Image View
+                            PostsItem.ImageUIItem(imageResId = R.drawable.ic_image_one),
+                            //Post View
+                            PostsItem.PostUIItem(title = response.title, body = response.body)
                         )
-                    }
-                    //Send map
+                    )
+
+                    postLiveData.value = items
+                    /*//Send map
                     useCaseLiveData.value =
-                        Event(UseCaseLiveData.ShowPosts(items))
+                        Event(UseCaseLiveData.ShowPosts(items))*/
                 }
-                is NetworkResponse.Error -> useCaseLiveData.value =
-                    Event(UseCaseLiveData.Error(this.code))
+                is NetworkResponse.Error -> {
+
+                    errorAPILiveData.value = true
+                    /*useCaseLiveData.value =
+                        Event(UseCaseLiveData.Error(this.code))*/
+                }
             }
         }
     }
 
-    private fun getRandomTitle(): Int {
-        return when (Random.nextInt(1, 3)) {
-            2 -> R.string.title_post_two
-            3 -> R.string.title_post_three
-            //1 ->
-            else -> {
-                R.string.title_post_one
-            }
-        }
-    }
-
-    private fun getRandomMessage(): Int {
-        return when (Random.nextInt(1, 3)) {
-            2 -> R.string.message_post_two
-            3 -> R.string.message_post_three
-            //1 ->
-            else -> {
-                R.string.message_post_one
-            }
-        }
-    }
 
     private fun getRandomImage(): Int {
         return when (Random.nextInt(1, 4)) {

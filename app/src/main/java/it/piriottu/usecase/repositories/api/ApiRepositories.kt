@@ -15,11 +15,11 @@ object ApiRepositories {
     private val API_WORKER: ApiWorker = ApiWorker()
     private val networkResponseCode = NetworkResponseCode()
 
-    suspend fun getAllPosts(): NetworkResponse<MutableList<PostResponse>> {
+    suspend fun getPost(): NetworkResponse<PostResponse> {
 
         return try {
             val response: HttpResponse =
-                API_WORKER.getClient().get(API_WORKER.BASE_URL + "/posts")
+                API_WORKER.getClient().get(API_WORKER.BASE_URL + "/posts/1")
             // Return response
             (NetworkResponse.Success(response.receive()))
 
