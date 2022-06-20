@@ -59,15 +59,15 @@ class PostViewModel : ViewModel() {
                         mutableListOf(
                             //Title View
                             PostItem.TitleUIItem(
-                                title = response.heading.title,
-                                subtitle = response.heading.subtitle
+                                title = response.title.title,
+                                subtitle = response.title.subtitle
                             ),
                             //Image View
                             PostItem.ImageUIItem(imageUrl = response.image),
                             //Post View
                             PostItem.DescriptionUIItem(
-                                title = response.body.title,
-                                body = response.body.body
+                                title = response.description.title,
+                                body = response.description.body
                             )
                         )
                     )
@@ -98,13 +98,13 @@ class PostViewModel : ViewModel() {
                         mutableListOf(
                             //Title View
                             PostItem.TitleUIItem(
-                                title = response.heading.title,
-                                subtitle = response.sub.subtitle
+                                title = response.title.title,
+                                subtitle = response.subtitle.subtitle
                             ),
                             //Description View
                             PostItem.DescriptionUIItem(
-                                title = response.body.title,
-                                body = response.body.partOne + response.body.partTwo + response.body.partThree
+                                title = response.description.title,
+                                body = response.description.partOne + response.description.partTwo + response.description.partThree
                             ),
                             //Gallery View
                             PostItem.GalleryUIItem(

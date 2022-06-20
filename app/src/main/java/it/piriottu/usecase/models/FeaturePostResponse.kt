@@ -7,12 +7,12 @@ package it.piriottu.usecase.models
  * Copyright © 2021 UseCase. All rights reserved.
  */
 data class FeaturePostResponse(
-    val body: Body,
+    val description: Description,
     val gallery: Gallery,
-    val heading: Heading,
-    val sub: Sub
+    val title: Title,
+    val subtitle: Subtitle
 ) {
-    data class Body(
+    data class Description(
         val partOne: String,
         val partThree: String,
         val partTwo: String,
@@ -24,11 +24,11 @@ data class FeaturePostResponse(
         val label: String
     )
 
-    data class Heading(
+    data class Title(
         val title: String
     )
 
-    data class Sub(
+    data class Subtitle(
         val subtitle: String
     )
 }
