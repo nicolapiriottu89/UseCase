@@ -9,7 +9,7 @@
         android:id="@+id/mainFragment"
         android:name="it.piriottu.usecase.ui.scenes.main.fragments.MainFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main" >
+        tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/to_postsFragment"
             app:destination="@id/postsFragment" />
@@ -19,12 +19,15 @@
     </fragment>
     <fragment
         android:id="@+id/postsFragment"
-        android:name="it.piriottu.usecase.ui.scenes.main.fragments.PostsFragment"
+        android:name="it.piriottu.usecase.ui.scenes.main.fragments.PostFragment"
         android:label="fragment_posts"
-        tools:layout="@layout/fragment_posts" >
+        tools:layout="@layout/fragment_post">
         <action
             android:id="@+id/to_errorFragment"
             app:destination="@id/errorFragment" />
+        <argument
+            android:name="isShowSimplePost"
+            app:argType="boolean" />
     </fragment>
     <fragment
         android:id="@+id/errorFragment"

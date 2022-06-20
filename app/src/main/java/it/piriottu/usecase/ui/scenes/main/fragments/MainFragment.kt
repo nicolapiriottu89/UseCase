@@ -10,7 +10,12 @@ import androidx.navigation.fragment.findNavController
 import it.piriottu.usecase.databinding.FragmentMainBinding
 import it.piriottu.usecase.ui.scenes.main.viewmodels.MainFragmentViewModel
 
-
+/**
+ * UseCase
+ *
+ * Created by Nicola Luigi Piriottu on 15/11/21.
+ * Copyright © 2021 UseCase. All rights reserved.
+ */
 class MainFragment : Fragment() {
     /**
      * Binding
@@ -56,11 +61,19 @@ class MainFragment : Fragment() {
             it.getContentIfNotHandled()?.let { useCase ->
                 when (useCase) {
                     is MainFragmentViewModel.UseCaseLiveData.GoToPostsFragment -> {
-                        findNavController().navigate(MainFragmentDirections.toPostsFragment())
+                        findNavController().navigate(
+                            MainFragmentDirections.toPostsFragment(
+                                isShowSimplePost = true
+                            )
+                        )
                     }
 
                     is MainFragmentViewModel.UseCaseLiveData.GoToErrorFragment -> {
-                        findNavController().navigate(MainFragmentDirections.toErrorFragment())
+                        findNavController().navigate(
+                            MainFragmentDirections.toPostsFragment(
+                                isShowSimplePost = false
+                            )
+                        )
                     }
                 }
             }

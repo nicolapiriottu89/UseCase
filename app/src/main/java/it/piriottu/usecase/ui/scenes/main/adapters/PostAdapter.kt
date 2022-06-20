@@ -5,8 +5,9 @@ import it.piriottu.usecase.ui.scenes.main.viewholders.PostViewHolder
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import it.piriottu.usecase.ui.scenes.main.sealed.PostsItem
-import it.piriottu.usecase.ui.scenes.main.sealed.PostsItem.PostsType.*
+import it.piriottu.usecase.ui.scenes.main.sealed.PostItem
+import it.piriottu.usecase.ui.scenes.main.sealed.PostItem.PostType.*
+import it.piriottu.usecase.ui.scenes.main.viewholders.GalleryViewHolder
 import it.piriottu.usecase.ui.scenes.main.viewholders.ImageViewHolder
 import it.piriottu.usecase.ui.scenes.main.viewholders.TitleViewHolder
 
@@ -16,8 +17,8 @@ import it.piriottu.usecase.ui.scenes.main.viewholders.TitleViewHolder
  * Created by Nicola Luigi Piriottu on 15/11/21.
  * Copyright © 2021 UseCase. All rights reserved.
  */
-class PostsListAdapter :
-    ListAdapter<PostsItem, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
+class PostAdapter :
+    ListAdapter<PostItem, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -35,10 +36,14 @@ class PostsListAdapter :
                     binding = ImageViewHolder.getBinding(parent)
                 )
             }
-            POST -> {
+            DESCRIPTION -> {
                 PostViewHolder(
                     binding = PostViewHolder.getBinding(parent)
                 )
+            }
+            //Feature
+            GALLERY -> {
+                GalleryViewHolder(binding = GalleryViewHolder.getBinding(parent))
             }
         }
     }
@@ -47,13 +52,17 @@ class PostsListAdapter :
 
         when (getItem(position).type) {
             TITLE -> {
-                (holder as TitleViewHolder).bind(getItem(position) as PostsItem.TitleUIItem)
+                (holder as TitleViewHolder).bind(getItem(position) as PostItem.TitleUIItem)
             }
             IMAGE -> {
-                (holder as ImageViewHolder).bind(getItem(position) as PostsItem.ImageUIItem)
+                (holder as ImageViewHolder).bind(getItem(position) as PostItem.ImageUIItem)
             }
-            POST -> {
-                (holder as PostViewHolder).bind(getItem(position) as PostsItem.PostUIItem)
+            DESCRIPTION -> {
+                (holder as PostViewHolder).bind(getItem(position) as PostItem.DescriptionUIItem)
+            }
+            //Feature
+            GALLERY -> {
+                (holder as GalleryViewHolder).bind(getItem(position) as PostItem.GalleryUIItem)
             }
         }
     }
@@ -61,11 +70,11 @@ class PostsListAdapter :
     override fun getItemViewType(position: Int): Int = getItem(position).type.ordinal
 
     companion object {
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<PostsItem>() {
-            override fun areItemsTheSame(oldItem: PostsItem, newItem: PostsItem) =
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<PostItem>() {
+            override fun areItemsTheSame(oldItem: PostItem, newItem: PostItem) =
                 oldItem == newItem
 
-            override fun areContentsTheSame(oldItem: PostsItem, newItem: PostsItem) =
+            override fun areContentsTheSame(oldItem: PostItem, newItem: PostItem) =
                 oldItem == newItem
         }
     }

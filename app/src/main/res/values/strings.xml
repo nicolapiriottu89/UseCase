@@ -5,5 +5,7 @@
 
     <string name="title_post_one">The Power of Now</string>
     <string name="message_post_one">Learn to listen to people. You will listen to yourself.</string>
+    <string name="show_simple_post">show simple post</string>
+    <string name="show_feature_post">show feature post</string>
 
 </resources>

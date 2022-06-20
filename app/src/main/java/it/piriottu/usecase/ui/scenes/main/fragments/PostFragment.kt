@@ -1,7 +1,6 @@
 package it.piriottu.usecase.ui.scenes.main.fragments
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,29 +8,38 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import it.piriottu.usecase.databinding.FragmentPostsBinding
+import androidx.navigation.fragment.navArgs
+import it.piriottu.usecase.databinding.FragmentPostBinding
 import it.piriottu.usecase.managers.SessionManager
-import it.piriottu.usecase.ui.scenes.main.adapters.PostsListAdapter
-import it.piriottu.usecase.ui.scenes.main.viewmodels.PostsFragmentViewModel
+import it.piriottu.usecase.ui.scenes.main.adapters.PostAdapter
+import it.piriottu.usecase.ui.scenes.main.viewmodels.PostViewModel
 
-
-class PostsFragment : Fragment() {
+/**
+ * Created by OverApp on 21/09/21.
+ *  Visit https://www.overapp.com/
+ */
+class PostFragment : Fragment() {
 
     /**
      * Binding
      */
-    private lateinit var binding: FragmentPostsBinding
+    private lateinit var binding: FragmentPostBinding
 
     /**
      * ViewModel
      * */
-    private val viewModel: PostsFragmentViewModel by viewModels()
+    private val viewModel: PostViewModel by viewModels()
+
+    /**
+     * Args
+     * */
+    private val args: PostFragmentArgs by navArgs()
 
     /**
      * Adapter
      */
     private val adapter by lazy {
-        PostsListAdapter()
+        PostAdapter()
     }
 
     override fun onCreateView(
@@ -40,7 +48,7 @@ class PostsFragment : Fragment() {
     ): View {
 
         // Inflate & Bind
-        binding = FragmentPostsBinding.inflate(inflater, container, false)
+        binding = FragmentPostBinding.inflate(inflater, container, false)
 
         // Setup Observer
         setupObservers()
@@ -52,7 +60,7 @@ class PostsFragment : Fragment() {
         binding.recyclerView.adapter = adapter
 
         //Get posts
-        viewModel.getPosts()
+        viewModel.showPost(args.isShowSimplePost)
 
         // Return root view
         return binding.root
@@ -71,29 +79,8 @@ class PostsFragment : Fragment() {
         }
 
         viewModel.errorAPILiveData.observe(viewLifecycleOwner) {
-            findNavController().navigate(PostsFragmentDirections.toErrorFragment())
+            findNavController().navigate(PostFragmentDirections.toErrorFragment())
             binding.progress.isVisible = false
-        }
-
-        viewModel.useCaseLiveData.observe(viewLifecycleOwner) {
-            it.getContentIfNotHandled()?.let { useCase ->
-                binding.progress.isVisible = false
-                when (useCase) {
-
-                    is PostsFragmentViewModel.UseCaseLiveData.ShowPosts -> {
-                        // Update Items
-                        adapter.submitList(useCase.items)
-
-                        Log.d("MainActivity", "ShowItems ${useCase.items}")
-                    }
-
-                    is PostsFragmentViewModel.UseCaseLiveData.Error -> {
-                        Log.d("MainActivity", "Error ${useCase.code}")
-                        findNavController().navigate(PostsFragmentDirections.toErrorFragment())
-                    }
-
-                }
-            }
         }
     }
     //endregion Private methods

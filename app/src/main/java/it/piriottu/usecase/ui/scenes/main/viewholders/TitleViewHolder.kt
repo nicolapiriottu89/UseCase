@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import it.piriottu.usecase.databinding.LayoutPostTitleBinding
-import it.piriottu.usecase.ui.scenes.main.sealed.PostsItem
+import it.piriottu.usecase.ui.scenes.main.sealed.PostItem
 
 /**
  * UseCase
@@ -15,9 +15,9 @@ import it.piriottu.usecase.ui.scenes.main.sealed.PostsItem
 class TitleViewHolder(private val binding: LayoutPostTitleBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(item: PostsItem.TitleUIItem) {
-        binding.layoutPostTitleTv.setText(item.titleResId)
-        binding.layoutPostTitleDescriptionTv.setText(item.descriptionResId)
+    fun bind(item: PostItem.TitleUIItem) {
+        binding.layoutPostTitleTv.text = item.title
+        binding.layoutPostTitleDescriptionTv.text = item.subtitle
     }
 
     companion object {

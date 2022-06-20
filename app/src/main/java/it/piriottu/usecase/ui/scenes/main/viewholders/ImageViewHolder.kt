@@ -3,9 +3,9 @@ package it.piriottu.usecase.ui.scenes.main.viewholders
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import it.piriottu.usecase.databinding.LayoutPostImageBinding
-import it.piriottu.usecase.databinding.LayoutPostTitleBinding
-import it.piriottu.usecase.ui.scenes.main.sealed.PostsItem
+import it.piriottu.usecase.ui.scenes.main.sealed.PostItem
 
 /**
  * UseCase
@@ -16,8 +16,11 @@ import it.piriottu.usecase.ui.scenes.main.sealed.PostsItem
 class ImageViewHolder(private val binding: LayoutPostImageBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(item: PostsItem.ImageUIItem) {
-        binding.layoutPostImageIv.setImageResource(item.imageResId)
+    fun bind(item: PostItem.ImageUIItem) {
+
+        Glide.with(binding.layoutPostImageIv).load(item.imageUrl)
+            .into(binding.layoutPostImageIv)
+
     }
 
     companion object {

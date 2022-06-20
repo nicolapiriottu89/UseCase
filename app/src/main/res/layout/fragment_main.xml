@@ -10,7 +10,7 @@
         android:id="@+id/fragmentGetPosts"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="get posts"
+        android:text="@string/show_simple_post"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -19,7 +19,7 @@
         android:id="@+id/fragmentError"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="get posts new UI"
+        android:text="@string/show_feature_post"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/fragmentGetPosts" />

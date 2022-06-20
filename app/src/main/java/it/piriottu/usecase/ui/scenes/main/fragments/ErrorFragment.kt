@@ -6,9 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import it.piriottu.usecase.databinding.FragmentErrorBinding
-import it.piriottu.usecase.databinding.FragmentMainBinding
-import it.piriottu.usecase.databinding.FragmentPostsBinding
-
 
 class ErrorFragment : Fragment() {
 

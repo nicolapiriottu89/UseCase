@@ -62,4 +62,7 @@ dependencies {
     //Ktor log response
     implementation 'io.ktor:ktor-client-logging:1.6.5'
     implementation "ch.qos.logback:logback-classic:1.2.3"
+    //Glide
+    implementation 'com.github.bumptech.glide:glide:4.13.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.13.0'
 }
