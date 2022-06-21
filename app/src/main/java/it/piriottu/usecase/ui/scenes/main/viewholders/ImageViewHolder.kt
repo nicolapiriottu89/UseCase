@@ -24,7 +24,7 @@ class ImageViewHolder(private val binding: LayoutPostImageBinding) :
     }
 
     companion object {
-        fun getBinding(parent: ViewGroup): LayoutPostImageBinding {
+        fun getLayoutInflated(parent: ViewGroup): LayoutPostImageBinding {
             val inflater = LayoutInflater.from(parent.context)
 
             return LayoutPostImageBinding.inflate(

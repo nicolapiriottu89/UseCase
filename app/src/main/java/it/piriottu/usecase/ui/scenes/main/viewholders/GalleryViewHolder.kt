@@ -35,7 +35,7 @@ class GalleryViewHolder(private val binding: LayoutPostGalleryItemBinding) :
     }
 
     companion object {
-        fun getBinding(parent: ViewGroup): LayoutPostGalleryItemBinding {
+        fun getLayoutInflated(parent: ViewGroup): LayoutPostGalleryItemBinding {
             val inflater = LayoutInflater.from(parent.context)
 
             return LayoutPostGalleryItemBinding.inflate(

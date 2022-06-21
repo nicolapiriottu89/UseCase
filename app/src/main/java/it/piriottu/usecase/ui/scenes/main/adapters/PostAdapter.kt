@@ -28,22 +28,22 @@ class PostAdapter :
         return when (values()[viewType]) {
             TITLE -> {
                 TitleViewHolder(
-                    binding = TitleViewHolder.getBinding(parent)
+                    binding = TitleViewHolder.getLayoutInflated(parent)
                 )
             }
             IMAGE -> {
                 ImageViewHolder(
-                    binding = ImageViewHolder.getBinding(parent)
+                    binding = ImageViewHolder.getLayoutInflated(parent)
                 )
             }
             DESCRIPTION -> {
                 PostViewHolder(
-                    binding = PostViewHolder.getBinding(parent)
+                    binding = PostViewHolder.getLayoutInflated(parent)
                 )
             }
             //Feature
             GALLERY -> {
-                GalleryViewHolder(binding = GalleryViewHolder.getBinding(parent))
+                GalleryViewHolder(binding = GalleryViewHolder.getLayoutInflated(parent))
             }
         }
     }

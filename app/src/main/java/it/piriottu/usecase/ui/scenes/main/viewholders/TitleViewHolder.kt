@@ -21,7 +21,7 @@ class TitleViewHolder(private val binding: LayoutPostTitleBinding) :
     }
 
     companion object {
-        fun getBinding(parent: ViewGroup): LayoutPostTitleBinding {
+        fun getLayoutInflated(parent: ViewGroup): LayoutPostTitleBinding {
             val inflater = LayoutInflater.from(parent.context)
 
             return LayoutPostTitleBinding.inflate(

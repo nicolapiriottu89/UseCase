@@ -21,7 +21,7 @@ class PostViewHolder(private val binding: LayoutPostItemBinding) :
     }
 
     companion object {
-        fun getBinding(parent: ViewGroup): LayoutPostItemBinding {
+        fun getLayoutInflated(parent: ViewGroup): LayoutPostItemBinding {
             val inflater = LayoutInflater.from(parent.context)
 
             return LayoutPostItemBinding.inflate(
