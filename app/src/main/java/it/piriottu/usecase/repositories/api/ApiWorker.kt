@@ -1,21 +1,21 @@
 package it.piriottu.usecase.repositories.api
 
-
 import android.util.Log
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
-import io.ktor.client.features.*
-import io.ktor.client.features.json.*
-import io.ktor.client.features.logging.*
-import io.ktor.client.features.observer.*
+import io.ktor.client.plugins.DefaultRequest
+import io.ktor.client.plugins.HttpTimeout
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.client.plugins.logging.DEFAULT
+import io.ktor.client.plugins.logging.LogLevel
+import io.ktor.client.plugins.logging.Logger
+import io.ktor.client.plugins.logging.Logging
+import io.ktor.client.plugins.observer.ResponseObserver
 import io.ktor.client.request.*
 import io.ktor.http.*
+import io.ktor.serialization.kotlinx.json.json
 import it.piriottu.usecase.managers.SessionManager
 
-/**
- * Created by OverApp on 21/09/21.
- *  Visit https://www.overapp.com/
- */
 class ApiWorker {
 
     val BASE_URL = "https://use-case-be.herokuapp.com"
@@ -30,9 +30,10 @@ class ApiWorker {
             //Pass your token
             header("Authorization", "Bearer ${SessionManager.userToken}")
         }
+
         // Json
-        install(JsonFeature) {
-            serializer = GsonSerializer()
+        install(ContentNegotiation) {
+            json()
         }
 
         // Timeout
@@ -54,7 +55,6 @@ class ApiWorker {
                 Log.d("ApiService", "HTTP status: ${response.status.value}")
             }
         }
-
     }
 
     fun getClient(): HttpClient {
