@@ -10,16 +10,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-/**
- * Created by OverApp on 21/09/21.
- *  Visit https://www.overapp.com/
- */
 class PostViewModel : ViewModel() {
 
     val postLiveData: MutableLiveData<MutableList<PostItem>> = MutableLiveData()
     val errorAPILiveData: MutableLiveData<Boolean> = MutableLiveData()
     //region Public Methods
-
 
     fun showPost(isShowSimplePost: Boolean) {
         if (isShowSimplePost) {
@@ -45,7 +40,7 @@ class PostViewModel : ViewModel() {
     //region Private Methods
     private suspend fun callSimplePost() {
         withContext(Dispatchers.IO) {
-            ApiRepositories.getSimplePost()
+            ApiRepositories.getPhoto(1)
         }.apply {
             when (this) {
                 is NetworkResponse.Success -> {
@@ -59,15 +54,15 @@ class PostViewModel : ViewModel() {
                         mutableListOf(
                             //Title View
                             PostItem.TitleUIItem(
-                                title = response.title.title,
-                                subtitle = response.title.subtitle
+                                title = response.title,
+                                subtitle = response.title
                             ),
                             //Image View
-                            PostItem.ImageUIItem(imageUrl = response.image),
+                            PostItem.ImageUIItem(imageUrl = response.url),
                             //Post View
                             PostItem.DescriptionUIItem(
-                                title = response.description.title,
-                                body = response.description.body
+                                title = response.title,
+                                body = response.title
                             )
                         )
                     )
@@ -84,7 +79,7 @@ class PostViewModel : ViewModel() {
 
     private suspend fun callFeaturePost() {
         withContext(Dispatchers.IO) {
-            ApiRepositories.getFeaturePost()
+            ApiRepositories.getPhoto(1)
         }.apply {
             when (this) {
                 is NetworkResponse.Success -> {
@@ -93,23 +88,26 @@ class PostViewModel : ViewModel() {
 
                     val response = this.data
 
+                    val images= mutableListOf(response.url,response.url,response.url)
+
                     //Map response
                     items.addAll(
                         mutableListOf(
                             //Title View
                             PostItem.TitleUIItem(
-                                title = response.title.title,
-                                subtitle = response.subtitle.subtitle
+                                title = response.title,
+                                subtitle = response.title
                             ),
                             //Description View
                             PostItem.DescriptionUIItem(
-                                title = response.description.title,
-                                body = response.description.partOne + response.description.partTwo + response.description.partThree
+                                title = response.title,
+                                body = response.title
                             ),
+
                             //Gallery View
                             PostItem.GalleryUIItem(
-                                title = response.gallery.label,
-                                imagesUrl = response.gallery.images
+                                title = response.title,
+                                imagesUrl = images
                             )
                         )
                     )
