@@ -1,6 +1,8 @@
 package it.piriottu.usecase.utils
 
-import io.ktor.client.features.*
+import io.ktor.client.plugins.ClientRequestException
+import io.ktor.client.plugins.RedirectResponseException
+import io.ktor.client.plugins.ServerResponseException
 import io.ktor.util.network.*
 
 /**

@@ -22,7 +22,7 @@ object ApiRepositories {
             val response: HttpResponse =
                 API_WORKER.getClient().get(API_WORKER.BASE_URL + "/simple")
             // Return response
-            (NetworkResponse.Success(response.receive()))
+            (NetworkResponse.Success(response.body()))
 
         } catch (e: Throwable) {
             (NetworkResponse.Error(networkResponseCode.checkError(e)))
@@ -35,7 +35,7 @@ object ApiRepositories {
             val response: HttpResponse =
                 API_WORKER.getClient().get(API_WORKER.BASE_URL + "/gallery")
             // Return response
-            (NetworkResponse.Success(response.receive()))
+            (NetworkResponse.Success(response.body()))
 
         } catch (e: Throwable) {
             (NetworkResponse.Error(networkResponseCode.checkError(e)))
