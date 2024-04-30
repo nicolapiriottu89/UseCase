@@ -3,6 +3,7 @@ package it.piriottu.usecase.ui.scenes.main.viewmodels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import it.piriottu.usecase.interactors.GetPhotosResponse
 import it.piriottu.usecase.repositories.api.ApiRepositories
 import it.piriottu.usecase.repositories.api.NetworkResponse
 import it.piriottu.usecase.ui.scenes.main.sealed.PostItem
@@ -10,7 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class PostViewModel : ViewModel() {
+class PostViewModel(private val useCase: GetPhotosResponse) : ViewModel() {
 
     val postLiveData: MutableLiveData<MutableList<PostItem>> = MutableLiveData()
     val errorAPILiveData: MutableLiveData<Boolean> = MutableLiveData()
@@ -18,29 +19,27 @@ class PostViewModel : ViewModel() {
 
     fun showPost(isShowSimplePost: Boolean) {
         if (isShowSimplePost) {
-            getSimplePost()
+            getSimple()
         } else {
-            getFeaturePost()
+            getFeature()
         }
     }
 
-    private fun getSimplePost() {
+    private fun getSimple() {
         viewModelScope.launch {
-            callSimplePost()
+            callSimplePhoto()
         }
     }
 
-    private fun getFeaturePost() {
+    private fun getFeature() {
         viewModelScope.launch {
-            callFeaturePost()
+            callFeaturePhoto()
         }
     }
 
-    //endregion Public Methods
-    //region Private Methods
-    private suspend fun callSimplePost() {
+    private suspend fun callFeaturePhoto(){
         withContext(Dispatchers.IO) {
-            ApiRepositories.getPhoto(1)
+            useCase.getPhoto(1)
         }.apply {
             when (this) {
                 is NetworkResponse.Success -> {
@@ -77,9 +76,11 @@ class PostViewModel : ViewModel() {
         }
     }
 
-    private suspend fun callFeaturePost() {
+    //endregion Public Methods
+    //region Private Methods
+    private suspend fun callSimplePhoto() {
         withContext(Dispatchers.IO) {
-            ApiRepositories.getPhoto(1)
+            useCase.getPhoto(1)
         }.apply {
             when (this) {
                 is NetworkResponse.Success -> {
@@ -87,8 +88,6 @@ class PostViewModel : ViewModel() {
                     val items: MutableList<PostItem> = mutableListOf()
 
                     val response = this.data
-
-                    val images= mutableListOf(response.url,response.url,response.url)
 
                     //Map response
                     items.addAll(
@@ -98,16 +97,12 @@ class PostViewModel : ViewModel() {
                                 title = response.title,
                                 subtitle = response.title
                             ),
-                            //Description View
+                            //Image View
+                            PostItem.ImageUIItem(imageUrl = response.url),
+                            //Post View
                             PostItem.DescriptionUIItem(
                                 title = response.title,
                                 body = response.title
-                            ),
-
-                            //Gallery View
-                            PostItem.GalleryUIItem(
-                                title = response.title,
-                                imagesUrl = images
                             )
                         )
                     )
@@ -121,5 +116,6 @@ class PostViewModel : ViewModel() {
             }
         }
     }
+
     //endregion Private Methods
 }

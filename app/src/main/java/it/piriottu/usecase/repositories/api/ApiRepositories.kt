@@ -7,10 +7,6 @@ import it.piriottu.usecase.models.PhotosResponse
 import it.piriottu.usecase.models.PostResponse
 import it.piriottu.usecase.utils.NetworkResponseCode
 
-/**
- * Created by OverApp on 21/09/21.
- *  Visit https://www.overapp.com/
- */
 object ApiRepositories {
 
     private val API_WORKER: ApiWorker = ApiWorker()

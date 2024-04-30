@@ -14,10 +14,6 @@ import it.piriottu.usecase.managers.SessionManager
 import it.piriottu.usecase.ui.scenes.main.adapters.PostAdapter
 import it.piriottu.usecase.ui.scenes.main.viewmodels.PostViewModel
 
-/**
- * Created by OverApp on 21/09/21.
- *  Visit https://www.overapp.com/
- */
 class PostFragment : Fragment() {
 
     /**
@@ -52,9 +48,6 @@ class PostFragment : Fragment() {
 
         // Setup Observer
         setupObservers()
-
-        //TODO copy your token here
-        SessionManager.userToken = "COPY-YOUR-TOKEN-HERE"
 
         //Setup recyclerView
         binding.recyclerView.adapter = adapter
