@@ -5,10 +5,6 @@ import io.ktor.client.plugins.RedirectResponseException
 import io.ktor.client.plugins.ServerResponseException
 import io.ktor.util.network.*
 
-/**
- * Created by OverApp on 21/09/21.
- *  Visit https://www.overapp.com/
- */
 class NetworkResponseCode {
 
     /**

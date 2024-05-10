@@ -4,10 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import it.piriottu.usecase.databinding.ActivityMainBinding
 
-/**
- * Created by OverApp on 15/11/21.
- *  Visit https://www.overapp.com/
- */
 class MainActivity : AppCompatActivity() {
 
     /**

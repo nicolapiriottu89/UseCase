@@ -1,5 +1,6 @@
 package it.piriottu.usecase.utils
 
+//Single event live data
 open class Event<out T>(private val content: T) {
 
     var hasBeenHandled = false

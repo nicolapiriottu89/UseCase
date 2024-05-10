@@ -4,16 +4,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import it.piriottu.usecase.utils.Event
 
-/**
- * Created by OverApp on 21/09/21.
- *  Visit https://www.overapp.com/
- */
 class MainFragmentViewModel : ViewModel() {
 
     //region UseCase
     sealed class UseCaseLiveData {
-        object GoToPostsFragment : UseCaseLiveData()
-        object GoToErrorFragment : UseCaseLiveData()
+        data object GoToPostsFragment : UseCaseLiveData()
+        data object GoToErrorFragment : UseCaseLiveData()
     }
     //endregion UseCase
 

@@ -14,21 +14,18 @@ import io.ktor.client.plugins.observer.ResponseObserver
 import io.ktor.client.request.*
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.json
-import it.piriottu.usecase.managers.SessionManager
 
 class ApiWorker {
 
-    val BASE_URL = "https://use-case-be.herokuapp.com"
+    val BASE_URL = "https://jsonplaceholder.typicode.com"
 
     private val client = HttpClient(CIO) {
 
-        //Header
+        //Header config default params
         install(DefaultRequest) {
             header("Accept", "application/json")
             header("Content-type", "application/json")
             contentType(ContentType.Application.Json)
-            //Pass your token
-            header("Authorization", "Bearer ${SessionManager.userToken}")
         }
 
         // Json

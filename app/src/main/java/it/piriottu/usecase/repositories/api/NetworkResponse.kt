@@ -1,9 +1,5 @@
 package it.piriottu.usecase.repositories.api
 
-/**
- * Created by OverApp on 21/09/21.
- *  Visit https://www.overapp.com/
- */
 sealed class NetworkResponse<out T : Any> {
     /**
      * response with a 2xx status code
