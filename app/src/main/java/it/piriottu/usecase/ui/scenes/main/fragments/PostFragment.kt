@@ -10,7 +10,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import it.piriottu.usecase.databinding.FragmentPostBinding
-import it.piriottu.usecase.managers.SessionManager
 import it.piriottu.usecase.ui.scenes.main.adapters.PostAdapter
 import it.piriottu.usecase.ui.scenes.main.viewmodels.PostViewModel
 

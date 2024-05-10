@@ -7,8 +7,8 @@ import it.piriottu.usecase.usecases.PhotosResponseUseCase
 
 class GetPhotosResponse(private val repository: ApiRepositories): PhotosResponseUseCase {
 
-    override suspend fun getPhoto(userId: Int): NetworkResponse<PhotosResponse> {
-      return repository.getPhoto(userId)
+    override suspend fun getPhotoByUserId(userId: Int): NetworkResponse<PhotosResponse> {
+      return repository.getPhotoByUserId(userId)
     }
 
 }

@@ -11,9 +11,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class PostViewModel(private val useCase: GetPhotosResponse) : ViewModel() {
+class PostViewModel : ViewModel() {
 
+    //TODO WIP
+    private val useCase = GetPhotosResponse(repository = ApiRepositories)
+
+    //UIItem
     val postLiveData: MutableLiveData<MutableList<PostItem>> = MutableLiveData()
+
     val errorAPILiveData: MutableLiveData<Boolean> = MutableLiveData()
     //region Public Methods
 
@@ -37,9 +42,9 @@ class PostViewModel(private val useCase: GetPhotosResponse) : ViewModel() {
         }
     }
 
-    private suspend fun callFeaturePhoto(){
+    private suspend fun callFeaturePhoto() {
         withContext(Dispatchers.IO) {
-            useCase.getPhoto(1)
+            useCase.getPhotoByUserId(1)
         }.apply {
             when (this) {
                 is NetworkResponse.Success -> {
@@ -47,6 +52,9 @@ class PostViewModel(private val useCase: GetPhotosResponse) : ViewModel() {
                     val items: MutableList<PostItem> = mutableListOf()
 
                     val response = this.data
+
+                    val images =
+                        mutableListOf(response.url, response.url, response.url, response.url)
 
                     //Map response
                     items.addAll(
@@ -56,18 +64,22 @@ class PostViewModel(private val useCase: GetPhotosResponse) : ViewModel() {
                                 title = response.title,
                                 subtitle = response.title
                             ),
-                            //Image View
-                            PostItem.ImageUIItem(imageUrl = response.url),
-                            //Post View
+                            //Description View
                             PostItem.DescriptionUIItem(
                                 title = response.title,
                                 body = response.title
+                            ),
+                            //Gallery View
+                            PostItem.GalleryUIItem(
+                                title = response.title,
+                                imagesUrl = images
                             )
                         )
                     )
                     //notify
                     postLiveData.value = items
                 }
+
                 is NetworkResponse.Error -> {
                     //notify
                     errorAPILiveData.value = true
@@ -80,7 +92,7 @@ class PostViewModel(private val useCase: GetPhotosResponse) : ViewModel() {
     //region Private Methods
     private suspend fun callSimplePhoto() {
         withContext(Dispatchers.IO) {
-            useCase.getPhoto(1)
+            useCase.getPhotoByUserId(1)
         }.apply {
             when (this) {
                 is NetworkResponse.Success -> {
@@ -92,13 +104,16 @@ class PostViewModel(private val useCase: GetPhotosResponse) : ViewModel() {
                     //Map response
                     items.addAll(
                         mutableListOf(
+
                             //Title View
                             PostItem.TitleUIItem(
                                 title = response.title,
                                 subtitle = response.title
                             ),
+
                             //Image View
                             PostItem.ImageUIItem(imageUrl = response.url),
+
                             //Post View
                             PostItem.DescriptionUIItem(
                                 title = response.title,
@@ -106,9 +121,11 @@ class PostViewModel(private val useCase: GetPhotosResponse) : ViewModel() {
                             )
                         )
                     )
+
                     //notify
                     postLiveData.value = items
                 }
+
                 is NetworkResponse.Error -> {
                     //notify
                     errorAPILiveData.value = true

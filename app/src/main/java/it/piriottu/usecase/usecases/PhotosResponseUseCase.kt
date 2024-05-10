@@ -4,5 +4,5 @@ import it.piriottu.usecase.models.PhotosResponse
 import it.piriottu.usecase.repositories.api.NetworkResponse
 
 interface PhotosResponseUseCase {
-    suspend fun getPhoto(userId:Int): NetworkResponse<PhotosResponse>
+    suspend fun getPhotoByUserId(userId:Int): NetworkResponse<PhotosResponse>
 }
